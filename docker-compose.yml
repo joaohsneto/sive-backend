@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  postgres_db:
+    image: postgres:16-alpine
+    container_name: postgres_alpine_16
+    restart: always
+
+    environment:
+      POSTGRES_USER: ${DATABASE_USER} 
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - pg_data_volume:/var/lib/postgresql/data
+
+volumes:
+  pg_data_volume:

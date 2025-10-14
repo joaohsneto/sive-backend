@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  usuario_id String @id @default(uuid())
+
+  nome_usuario String
+  login        String   @unique
+  email        String   @unique
+  cpf          String   @unique
+  funcao       String
+  senha        String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("usuarios")
+}
+
+model CriancasAdolescentes {
+  criancas_adolescentes_id String @id @default(uuid())
+
+  cpf String @unique
+
+  nome                   String
+  filiacao_pai           String
+  filiacao_mae           String
+  idade_nascimento       String
+  com_quem_mora          String
+  endereco               String
+  ponto_referencia       String
+  telefone               String
+  email                  String @unique
+  contato                String
+  telefone_contato       String
+  registro_civil         String
+  sexo                   String
+  comunidade_originarios String
+  deficiencia            String
+  condicao_saude         String
+  programas_sociais      String
+  ocupacao_atividade     String
+  renda_familiar         String
+  tipo_imovel            String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("criancas_adolescentes")
+}
+
+model Responsavel {
+  responsavel_id String @id @default(uuid())
+
+  nome     String
+  cpf      String  @unique
+  email    String  @unique
+  telefone String?
+  whatsapp String?
+  funcao   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("responsaveis")
+}
