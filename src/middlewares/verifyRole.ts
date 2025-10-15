@@ -5,11 +5,11 @@ export function verifyRole(requiredRole: string) {
     const user = (request as any).user;
 
     if (!user) {
-      return reply.status(401).send({ message: 'Usuário não autenticado' });
+      return reply.status(401).send({ message: 'Usuário Não Autenticado!' });
     }
 
     if (user.funcao !== requiredRole) {
-      return reply.status(403).send({ message: 'Acesso negado' });
+      return reply.status(403).send({ message: 'Acesso Negado!' });
     }
   };
 }
