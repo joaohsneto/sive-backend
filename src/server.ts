@@ -10,7 +10,11 @@ app.register(cors, {
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
 });
 
-app.register(routes, {prefix: '/api'})
+const HOST = process.env.HOST
+const PORT = process.env.PORT || 3333;
+
+app.register(routes, { prefix: '/api' })
+
 
 async function DbConnected() {
     try {
@@ -22,6 +26,6 @@ async function DbConnected() {
 }
 
 app.listen({ port: 3333 }, () => {
-    console.log("🚀 Server rodando em http://localhost:3333/api");
+    console.log(`🚀 Server rodando em http://${HOST}:${PORT}/api/`);
     DbConnected();
 })
