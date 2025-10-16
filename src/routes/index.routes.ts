@@ -1,5 +1,6 @@
 import { FastifyPluginAsync } from "fastify";
 import { CadastrosRoutes } from "./cadastros/cadastros.routes";
+import { RelatoriosRoutes } from '@/routes/relatorios/relatorios.routes'
 import { AuthRoutes } from "./auth/Auth.routes";
 
 export const routes: FastifyPluginAsync = async (fastify) => {
@@ -8,4 +9,5 @@ export const routes: FastifyPluginAsync = async (fastify) => {
   })
   fastify.register(CadastrosRoutes, { prefix: "/cadastros" });
   fastify.register(AuthRoutes, { prefix: "/auth" });
+  fastify.register(RelatoriosRoutes, { prefix: "/relatorios" });
 }
