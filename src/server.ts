@@ -25,7 +25,7 @@ async function DbConnected() {
     }
 }
 
-app.listen({ port: 3333 }, () => {
+app.listen({ port: Number(PORT), host: HOST }, () => {
     console.log(`🚀 Server rodando em http://${HOST}:${PORT}/api/`);
     DbConnected();
 })
