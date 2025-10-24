@@ -8,15 +8,14 @@ export class FichaSiveRepository implements IFichaSiveRepository {
         responsavel_id: string,
     ): Promise<IFichaSiveReturnDTO> {
         const [criancaAdolescente, responsavel] = await Promise.all([
-            
-            // Busca a Criança/Adolescente
             prisma.criancasAdolescentes.findUnique({
                 where: {
                     criancas_adolescentes_id: criancas_adolescentes_id,
                 },
+                include: {
+                    encaminhamentos: true,
+                },
             }),
-            
-            // Busca o Responsável
             prisma.responsavel.findUnique({
                 where: {
                     responsavel_id: responsavel_id,

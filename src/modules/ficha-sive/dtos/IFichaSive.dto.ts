@@ -1,6 +1,10 @@
-import { Responsavel, CriancasAdolescentes } from "@prisma/client";
+import { Responsavel, CriancasAdolescentes, Encaminhamentos } from "@prisma/client";
+
+type CriancasAdolescentesComEncaminhamentos = CriancasAdolescentes & {
+    encaminhamentos: Encaminhamentos[];
+};
 export interface IFichaSiveReturnDTO {
-    criancaAdolescente: CriancasAdolescentes | null;
+    criancaAdolescente: CriancasAdolescentesComEncaminhamentos | null; 
     responsavel: Responsavel | null;
 }
 

@@ -47,9 +47,37 @@ model CriancasAdolescentes {
   ocupacao_atividade     String
   renda_familiar         String
   tipo_imovel            String
+  situacao_trabalho      String @default("")
+
+  orgao_responsavel              String  @default("")
+  orgao_responsavel_outro        String?
+  data_encaminhamento            String  @default("")
+  motivacao_encaminhamento       String  @default("")
+  motivacao_encaminhamento_outro String?
+
+  descricao_atendimento String @default("")
+  relato_espontaneo     String @default("")
+
+  Avaliacao_individual     String?
+  Avaliacao_familiar       String?
+  Avaliacao_domicilio      String?
+  Escuta_especializada     String?
+  Organ_cuidado_individual String?
+  Organ_cuidado_conjunto   String?
+  Organ_cuidado_familia    String?
+
+  agente_violador        String @default("")
+  status                 String @default("")
+  tipo_acompanhamento    String @default("")
+  periodo_acompanhamento String @default("")
+
+  motivo_encerramento       String  @default("")
+  motivo_encerramento_outro String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  encaminhamentos Encaminhamentos[]
 
   @@map("criancas_adolescentes")
 }
@@ -68,4 +96,24 @@ model Responsavel {
   updatedAt DateTime @updatedAt
 
   @@map("responsaveis")
+}
+
+model Encaminhamentos {
+  encaminhamento_id String @id @default(uuid())
+
+  criancas_adolescentes_id String
+  crianca_adolescente      CriancasAdolescentes @relation(fields: [criancas_adolescentes_id], references: [criancas_adolescentes_id])
+
+  tipo_encaminhamento       String
+  tipo_encaminhamento_outro String?
+
+  necessario Int @default(0)
+
+  efetuado Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([criancas_adolescentes_id, tipo_encaminhamento])
+  @@map("encaminhamentos")
 }
